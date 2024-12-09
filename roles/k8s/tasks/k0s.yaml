@@ -1,7 +1,7 @@
 ---
 - name: Donwload k0sctl
   get_url:
-    url: https://github.com/k0sproject/k0sctl/releases/download/v{{ k0sctl_version }}/k0sctl-linux-x64
+    url: https://github.com/k0sproject/k0sctl/releases/download/v{{ k0sctl_version }}/k0sctl-linux-amd64
     checksum: 'sha256:{{ k0sctl_checksum }}'
     dest: '{{ mdxuser_home }}/k0sctl'
 
