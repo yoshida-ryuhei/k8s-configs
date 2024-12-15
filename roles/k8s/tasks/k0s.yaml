@@ -1,7 +1,7 @@
 ---
 - name: Donwload k0sctl
   get_url:
-    url: https://github.com/k0sproject/k0sctl/releases/download/v{{ k0sctl_version }}/k0sctl-linux-x64
+    url: https://github.com/k0sproject/k0sctl/releases/download/v{{ k0sctl_version }}/k0sctl-linux-amd64
     checksum: 'sha256:{{ k0sctl_checksum }}'
     dest: '{{ mdxuser_home }}/k0sctl'
 
@@ -21,6 +21,11 @@
   template:
     src: templates/k0sctl.yaml.j2
     dest: k0sctl.yaml
+
+- name: Reset kubernetes cluster
+  shell:
+     cmd: k0sctl reset --config k0sctl.yaml --force
+     chdir: '{{ mdxuser_home }}'
 
 - name: Create kubernetes cluster
   shell:
