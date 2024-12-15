@@ -43,17 +43,49 @@ For example, use the ``-A`` (ForwardAgent) option to allow recursive SSH access 
 
 ## Getting Started
 
-1. Install the ansible package on the bastion host.
+Install the ansible package on the bastion host.
 ```sh
 $ sudo apt install ansible
 ```
 
-2. Install the dependent pip3 packages (kubernets and openshift) and Ansible galaxy collection (kubernetes.core).
+Install Pyenv
 ```sh
-$ install_dep_packages.py
+$ sudo apt update
+$ sudo apt install -y \
+    make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl \
+    llvm libncurses5-dev libncursesw5-dev \
+    xz-utils tk-dev libffi-dev liblzma-dev \
+    git
+$ curl https://pyenv.run | bash
 ```
 
-3. Copy the inventory file from the template and rewrite the file accordingly. 
+```shell
+echo '' >> ~/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Install python runtime with Pyenv.
+```shell
+pyenv install 3.10.16
+pyenv global 3.10.16
+```
+
+Create and activate python virtual env
+```shell
+python -m venv ~/python_env
+source ~/python_env/bin/activate
+```
+
+Install the dependent pip packages (kubernets and openshift) and Ansible galaxy collection (kubernetes.core).
+```sh
+$ pip install -r requirements.txt
+```
+
+Copy the inventory file from the template and rewrite the file accordingly. 
 ```sh
 $ cp inventory.ini.template inventory.ini
 $ mg inventory.ini
@@ -78,7 +110,7 @@ kube-gpu1 ansible_host= roce_host=
 kube-gpu2 ansible_host= roce_host=
 ```
 
-4. Copy the password file from the template and rewrite it. 
+Copy the password file from the template and rewrite it. 
 ```sh
 $ cp vault.yaml.template vault.yaml
 $ mg vault.yaml
@@ -94,12 +126,12 @@ harbor_db_password:
 grafana_password:
 ```
 
-5. Encrypt the above file by Ansible Vault (set the Vault password).
+Encrypt the above file by Ansible Vault (set the Vault password).
 ```sh
 $ encrypt_vault.sh
 ```
 
-6. Run the playbook and wait until the Kubernetes platform is constructed.
+Run the playbook and wait until the Kubernetes platform is constructed.
 ```sh
 $ play.sh
 ```
