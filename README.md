@@ -45,44 +45,24 @@ For example, use the ``-A`` (ForwardAgent) option to allow recursive SSH access 
 
 Install the ansible package on the bastion host.
 ```sh
+$ sudo apt update
 $ sudo apt install ansible
 ```
 
-Install Pyenv
+Install python3-pip to OS
 ```sh
-$ sudo apt update
-$ sudo apt install -y \
-    make build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev wget curl \
-    llvm libncurses5-dev libncursesw5-dev \
-    xz-utils tk-dev libffi-dev liblzma-dev \
-    git
-$ curl https://pyenv.run | bash
+$ sudo apt install python3-pip
 ```
 
+Upgrade base library to run pip installation command correctly
 ```shell
-echo '' >> ~/.bashrc
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
-source ~/.bashrc
+$ pip3 install --upgrade setuptools pip wheel
+$ pip3 install --upgrade packaging
 ```
 
-Install python runtime with Pyenv.
+Install required libraries
 ```shell
-pyenv install 3.10.16
-pyenv global 3.10.16
-```
-
-Create and activate python virtual env
-```shell
-python -m venv ~/python_env
-source ~/python_env/bin/activate
-```
-
-Install the dependent pip packages (kubernets and openshift) and Ansible galaxy collection (kubernetes.core).
-```sh
-$ pip install -r requirements.txt
+sh install_dep_packages.sh
 ```
 
 Copy the inventory file from the template and rewrite the file accordingly. 
