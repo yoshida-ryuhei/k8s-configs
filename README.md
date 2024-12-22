@@ -113,6 +113,9 @@ $ encrypt_vault.sh
 
 Run the playbook and wait until the Kubernetes platform is constructed.
 ```sh
+$ eval `ssh-agent`
+$ ssh-add ${ssh_key}
+$ ssh-add -l # check the key is added.
 $ play.sh
 ```
 
