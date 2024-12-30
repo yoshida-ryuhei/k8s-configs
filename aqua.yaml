@@ -11,3 +11,5 @@ registries:
 packages:
   - name: astral-sh/rye@0.43.0
   - name: helm/helm@v3.16.4
+  - name: kubernetes/kubectl@v1.32.0
+  - name: ahmetb/kubectx/kubens@v0.9.5
