@@ -14,5 +14,5 @@ install_jupyter_by_helm: config.yaml
 		--namespace jupyter-test \
 		--create-namespace \
 		--version=$(shell helm inspect chart jupyterhub/jupyterhub  | yq .version) \
-		--value config.yaml
+		--values config.yaml
 
