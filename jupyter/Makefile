@@ -1,4 +1,9 @@
 
+.PHONY: add_jupyterhub_repo
+add_jupyterhub_repo:
+	helm repo add jupyterhub https://hub.jupyter.org/helm-chart/
+	helm repo update
+
 config.yaml:
 	helm inspect values jupyterhub/jupyterhub > config.yaml
 
