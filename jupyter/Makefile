@@ -9,7 +9,7 @@ config.yaml:
 
 .PHONY: install_jupyter_by_helm
 install_jupyter_by_helm: config.yaml
-	helm upgrade --cleanup-on-faile \
+	helm upgrade --cleanup-on-fail \
 		--install main jupyterhub/jupyterhub \
 		--namespace jupyter-test \
 		--create-namespace \
